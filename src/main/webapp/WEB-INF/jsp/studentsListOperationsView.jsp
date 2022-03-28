@@ -33,8 +33,12 @@
                     Go back to the university
                 </button>
             </form>
+            <h2 class="pl-2 pr-2">
+                <c:if test="${requestScope.operation == null}">
+                    No operation results, sorry....
+                </c:if>
+            </h2>
         </div>
-        <h2 class="pl-2 pr-2">${requestScope.get("operation") == null ? "No operation results, sorry...." : requestScope.get("operation")}</h2>
     </div>
     <div class="container-fluid d-flex flex-column rounded">
         <table class="table table-info rounded mt-4">

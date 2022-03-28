@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -14,7 +15,7 @@
 </head>
 <body class="d-flex flex-column justify-content-center">
 <div class="container-fluid d-flex flex-row justify-content-around mt-5">
-    <h1>${requestScope.get("student").name == null ? "No student content, sorry....." : ""}</h1>
+    <h1><c:if test="${requestScope.student.name == null}">No student content, sorry.....</c:if></h1>
     <div class="d-flex align-items-center">
         <form action="faculty-servlet">
             <input type="text" style="display: none;" name="facultyName" value="${requestScope.student.faculty}">
@@ -44,11 +45,11 @@
                 <h3>Average mark:</h3>
             </div>
             <div class="container-fluid d-flex flex-column rounded mt-3 mb-3">
-                <h3>${requestScope.student.name}</h3>
-                <h3>${requestScope.student.surname}</h3>
-                <h3>${requestScope.student.faculty}</h3>
-                <h3> ${requestScope.student.markBookId}</h3>
-                <h3> ${requestScope.student.averageMark}</h3>
+                <h3><c:out value="${requestScope.student.name}"/></h3>
+                <h3><c:out value="${requestScope.student.surname}"/></h3>
+                <h3><c:out value="${requestScope.student.faculty}"/></h3>
+                <h3><c:out value="${requestScope.student.markBookId}"/></h3>
+                <h3><c:out value="${requestScope.student.averageMark}"/></h3>
             </div>
         </div>
     </div>

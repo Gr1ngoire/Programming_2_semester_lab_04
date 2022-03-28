@@ -15,11 +15,11 @@
 </head>
 <body class="d-flex flex-column justify-content-center">
 <div class="container-fluid d-flex flex-row justify-content-center mt-5">
-    <h1>${requestScope.get("university").name == null ? "No university content, sorry....." : ""}</h1>
+    <h1><c:if test="${requestScope.university.name == null}">No university content, sorry.....</c:if></h1>
     <div style="display: ${requestScope.get("university").name == null ? "none" : "block"};" class="w-75 mt-5">
         <div class="d-flex justify-content-center">
             <h1 class="bg-info text-center rounded w-75">University: <p
-                    class="text-danger">${requestScope.get("university").name}</p></h1>
+                    class="text-danger"><c:out value="${requestScope.university.name}"/></p></h1>
         </div>
         <div class="container-fluid d-flex flex-column rounded">
             <table class="table table-info rounded mt-4">
@@ -34,7 +34,7 @@
                 <c:forEach var="faculty" items="${requestScope.university.faculties}">
                     <tr>
                         <th class="text-center"
-                            scope="row">${Math.round(Math.random() * 1000)}_${requestScope.get("university").name.toLowerCase()}</th>
+                            scope="row">${Math.round(Math.random() * 1000)}_<c:out value="${requestScope.university.name.toLowerCase()}"/></th>
                         <td class="text-center">${faculty.name}</td>
                         <td class="d-flex justify-content-center">
                             <form action="faculty-servlet" class="d-flex flex-row justify-content-center">
