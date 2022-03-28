@@ -38,6 +38,16 @@ public class Faculty implements Serializable {
         students.add(newStudent);
     }
 
+    public void updateStudent(Student updatedStudent) {
+        for (Student s: students) {
+            if (s.getMarkBookId().equals(updatedStudent.getMarkBookId())){
+                s.setName(updatedStudent.getName());
+                s.setSurname(updatedStudent.getSurname());
+                s.setAverageMark(updatedStudent.getAverageMark());
+            }
+        }
+    }
+
     public void removeStudent(Student studentToRemove) {
         students.remove(studentToRemove);
     }

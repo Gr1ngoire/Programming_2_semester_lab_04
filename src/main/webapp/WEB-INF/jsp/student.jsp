@@ -13,9 +13,28 @@
     <title>Student Page</title>
 </head>
 <body class="d-flex flex-column justify-content-center">
-<div class="container-fluid d-flex flex-row justify-content-center mt-5">
+<div class="container-fluid d-flex flex-row justify-content-around mt-5">
     <h1>${requestScope.get("student").name == null ? "No student content, sorry....." : ""}</h1>
-    <div style="display: ${requestScope.get("student").name == null ? "none" : "block"};" class="bg-info w-50 mt-5">
+    <div class="d-flex align-items-center">
+        <form action="faculty-servlet">
+            <input type="text" style="display: none;" name="facultyName" value="${requestScope.student.faculty}">
+            <button type="submit"
+                    class="btn btn-outline-primary">
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-arrow-left"
+                        viewBox="0 0 16 16"
+                >
+                    <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+                Go back to the faculty
+            </button>
+        </form>
+    </div>
+    <div style="display: ${requestScope.get("student").name == null ? "none" : "block"};" class="bg-info w-50 mt-5 rounded">
         <div class="container-fluid d-flex flex-row rounded text-danger">
             <div class="container-fluid d-flex flex-column justify-content-between rounded mt-3 mb-3">
                 <h3>Name:</h3>

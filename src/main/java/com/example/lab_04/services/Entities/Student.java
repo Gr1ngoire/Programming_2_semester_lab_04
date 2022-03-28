@@ -13,7 +13,7 @@ public class Student extends HumanInUniversity implements Serializable {
     private String surname;
     private String faculty;
     private String markBookId;
-    private int averageMark;
+    private double averageMark;
 
     public Student(StudentBuilder studentBuilder) {
         this.name = studentBuilder.name;
@@ -43,23 +43,15 @@ public class Student extends HumanInUniversity implements Serializable {
         return faculty;
     }
 
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
-    }
-
     public String getMarkBookId() {
         return markBookId;
     }
 
-    public void setMarkBookId(String markBookId) {
-        this.markBookId = markBookId;
-    }
-
-    public int getAverageMark() {
+    public double getAverageMark() {
         return averageMark;
     }
 
-    public void setAverageMark(int averageMark) {
+    public void setAverageMark(double averageMark) {
         this.averageMark = averageMark;
     }
 
@@ -76,6 +68,17 @@ public class Student extends HumanInUniversity implements Serializable {
         return Objects.hash(name, surname, markBookId, averageMark);
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", faculty='" + faculty + '\'' +
+                ", markBookId='" + markBookId + '\'' +
+                ", averageMark=" + averageMark +
+                '}';
+    }
+
     public void accept(List<Student> list, IStudentsInUniversityVisitorStudentVisitor siuvsv) {
         siuvsv.visit(list, this);
     }
@@ -85,7 +88,7 @@ public class Student extends HumanInUniversity implements Serializable {
     }
 
     public void accept(List<Student> list, IAverageMarkIsHighStudentVisitor amih) {
-        amih.visit(list,this);
+        amih.visit(list, this);
     }
 
     public static class StudentBuilder {
@@ -93,7 +96,7 @@ public class Student extends HumanInUniversity implements Serializable {
         private String surname;
         private String faculty;
         private String markBookId;
-        private int averageMark;
+        private double averageMark;
 
         public StudentBuilder(String name) {
             this.name = name;
@@ -114,7 +117,7 @@ public class Student extends HumanInUniversity implements Serializable {
             return this;
         }
 
-        public StudentBuilder setAverageMark(int averageMark) {
+        public StudentBuilder setAverageMark(double averageMark) {
             this.averageMark = averageMark;
             return this;
         }

@@ -13,40 +13,37 @@ import java.util.List;
 @WebServlet(name = "StudentServlet", value = "/student-servlet")
 public class StudentServlet extends HttpServlet {
     DAO dao;
-    List<Faculty> facultiesList;
 
     public void init() {
         dao = new DAO();
-        try {
-            facultiesList = dao.getData().getFaculties();
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-        String studentNameSurnameFaculty = request.getParameter("studentNameSurname");
-        String[] studentNameSurnameFacultyToFindData = studentNameSurnameFaculty.split(" ");
-        String studentName = studentNameSurnameFacultyToFindData[0];
-        String studentSurname = studentNameSurnameFacultyToFindData[1];
-        String facultyName = studentNameSurnameFacultyToFindData[2];
+        String actionTypeToLookAt = request.getParameter("actionTypeToLookAt");
 
-        System.out.println(studentName);
-        System.out.println(studentSurname);
-        System.out.println(facultyName);
-        for (Faculty f : facultiesList) {
-            if (f.getName().equals(facultyName)) {
-                for (Student s : f.getStudents()) {
-                    if (s.getName().equals(studentName) && s.getSurname().equals(studentSurname)) {
-                        request.setAttribute("student", s);
-                        request.getRequestDispatcher("WEB-INF/jsp/student.jsp").forward(request, response);
-                        break;
+        String studentMarkBookIdFaculty = request.getParameter("studentNameSurname");
+        String[] studentMarkBookIdFacultyToFindData = studentMarkBookIdFaculty.split(" ");
+        String studentBookMarkId = studentMarkBookIdFacultyToFindData[0];
+        String facultyName = studentMarkBookIdFacultyToFindData[1];
+
+        try {
+            List<Faculty> facultiesList = dao.getData().getFaculties();
+            for (Faculty f : facultiesList) {
+                if (f.getName().equals(facultyName)) {
+                    for (Student s : f.getStudents()) {
+                        if (s.getMarkBookId().equals(studentBookMarkId)) {
+                            request.setAttribute("student", s);
+                            request.getRequestDispatcher(String.format("WEB-INF/jsp/%s.jsp", actionTypeToLookAt == null ? "student" : "studentEditPage")).forward(request, response);
+                            break;
+                        }
                     }
                 }
             }
+        } catch (IOException | ClassNotFoundException e) {
+            request.setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("WEB-INF/jsp/errorPage.jsp").forward(request, response);
         }
     }
-
 }

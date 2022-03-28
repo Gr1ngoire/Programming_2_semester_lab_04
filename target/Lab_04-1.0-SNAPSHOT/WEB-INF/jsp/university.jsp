@@ -18,7 +18,8 @@
     <h1>${requestScope.get("university").name == null ? "No university content, sorry....." : ""}</h1>
     <div style="display: ${requestScope.get("university").name == null ? "none" : "block"};" class="w-75 mt-5">
         <div class="d-flex justify-content-center">
-            <h1 class="bg-info text-center rounded w-75">University: <p class="text-danger">${requestScope.get("university").name}</p></h1>
+            <h1 class="bg-info text-center rounded w-75">University: <p
+                    class="text-danger">${requestScope.get("university").name}</p></h1>
         </div>
         <div class="container-fluid d-flex flex-column rounded">
             <table class="table table-info rounded mt-4">
@@ -32,13 +33,24 @@
                 <tbody>
                 <c:forEach var="faculty" items="${requestScope.university.faculties}">
                     <tr>
-                        <th class="text-center" scope="row">${Math.round(Math.random() * 1000)}_${requestScope.get("university").name.toLowerCase()}</th>
+                        <th class="text-center"
+                            scope="row">${Math.round(Math.random() * 1000)}_${requestScope.get("university").name.toLowerCase()}</th>
                         <td class="text-center">${faculty.name}</td>
-                        <td>
+                        <td class="d-flex justify-content-center">
                             <form action="faculty-servlet" class="d-flex flex-row justify-content-center">
                                 <input type="text" style="display: none;" name="facultyName" value="${faculty.name}">
                                 <button class="btn btn-success" type="submit">
                                     Get ${faculty.name} students info
+                                </button>
+                            </form>
+                            <form action="university-servlet" method="post" class="d-flex flex-row justify-content-center">
+                                <input type="text" style="display: none;" name="facultyName" value="${faculty.name}">
+                                <input type="text" style="display: none" name="facultyActionType" value="Delete">
+                                <button class="btn btn-danger" type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                    </svg>
                                 </button>
                             </form>
                         </td>
@@ -49,8 +61,10 @@
             <div class="w-100">
                 <form class="d-flex flex-column" action="university-operations-handler-servlet">
                     <input class="btn btn-dark mt-1" type="submit" name="action" value="Get all students list">
-                    <input class="btn btn-danger mt-1" type="submit" name="action" value="Get faculty with biggest quantity of stdnts">
-                    <input class="btn btn-warning mt-1" type="submit" name="action" value="Get students with high marks">
+                    <input class="btn btn-danger mt-1" type="submit" name="action"
+                           value="Get faculty with biggest quantity of stdnts">
+                    <input class="btn btn-warning mt-1" type="submit" name="action"
+                           value="Get students with high marks">
                 </form>
             </div>
             <div class="d-flex flex-column w-100 mt-5" id="addFacultyContainer">
@@ -69,13 +83,18 @@
     addFacultyDiv.setAttribute("class", "d-flex flex-column")
 
     const addFacultyForm = document.createElement("form");
-    addFacultyForm.setAttribute("action", "faculty-servlet")
+    addFacultyForm.setAttribute("action", "university-servlet")
     addFacultyForm.setAttribute("method", "post");
 
     const addFacultyNameInput = document.createElement("input");
     addFacultyNameInput.setAttribute("placeholder", "Faculty name");
     addFacultyNameInput.setAttribute("name", "facultyToCreateName");
     addFacultyNameInput.setAttribute("class", "form-control mt-2");
+
+    const addFacultyInvisibleOperationType = document.createElement("input");
+    addFacultyInvisibleOperationType.setAttribute("name", "facultyActionType");
+    addFacultyInvisibleOperationType.setAttribute("value", "Create");
+    addFacultyInvisibleOperationType.style.display = "none";
 
     const buttonWrapper = document.createElement("div")
     buttonWrapper.setAttribute("class", "d-flex justify-content-center w-100 mt-3")
@@ -86,7 +105,7 @@
     addFacultySubmitButton.innerText = "Create Faculty!"
 
     buttonWrapper.append(addFacultySubmitButton)
-    addFacultyForm.append(addFacultyNameInput, buttonWrapper);
+    addFacultyForm.append(addFacultyNameInput, addFacultyInvisibleOperationType, buttonWrapper);
     addFacultyDiv.append(addFacultyForm);
     addFacultyButton.addEventListener('click', (event) => {
         const divToMoveItMoveIt = document.querySelector("#divToMoveItMoveIt");

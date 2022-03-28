@@ -15,7 +15,25 @@
 </head>
 <body class="d-flex flex-column justify-content-center">
 <div class="container-fluid d-flex flex-row align-items-center justify-content-center mt-5">
-    <div class="d-flex flex-row align-items-center bg-dark text-center text-light rounded h-50">
+    <div class="d-flex flex-column align-items-center bg-dark text-center text-light rounded h-50">
+        <div class="d-flex align-items-center mt-3">
+            <form action="university-servlet">
+                <button
+                        class="btn btn-outline-light">
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="bi bi-arrow-left"
+                            viewBox="0 0 16 16"
+                    >
+                        <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                    </svg>
+                    Go back to the university
+                </button>
+            </form>
+        </div>
         <h2 class="pl-2 pr-2">${requestScope.get("operation") == null ? "No operation results, sorry...." : requestScope.get("operation")}</h2>
     </div>
     <div class="container-fluid d-flex flex-column rounded">

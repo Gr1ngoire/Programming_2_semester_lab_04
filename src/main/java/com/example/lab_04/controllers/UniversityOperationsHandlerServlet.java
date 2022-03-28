@@ -1,8 +1,8 @@
 package com.example.lab_04.controllers;
 
+import com.example.lab_04.services.Actions.UniversityOperationsCommand.*;
 import com.example.lab_04.services.Entities.Faculty;
 import com.example.lab_04.services.Entities.Student;
-import com.example.lab_04.services.UniversityOperationsCommand.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -14,12 +14,11 @@ import java.util.Map;
 
 @WebServlet(name = "UniversityOperationsHandlerServlet", value = "/university-operations-handler-servlet")
 public class UniversityOperationsHandlerServlet extends HttpServlet {
-    Map<String, FacultyAction> facultyActions = new HashMap<>();
-    Map<String, StudentsAction> studentActions = new HashMap<>();
+    Map<String, FacultyOperationAction> facultyActions = new HashMap<>();
+    Map<String, StudentsOperationAction> studentActions = new HashMap<>();
 
     public void init() {
         facultyActions.put("Get faculty with biggest quantity of stdnts", new FacultyWithBiggestQuantityOfStudentsAction());
-
         studentActions.put("Get all students list", new AllStudentsListAction());
         studentActions.put("Get students with high marks", new StudentsWithHighMarksAction());
     }
