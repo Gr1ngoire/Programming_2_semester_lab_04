@@ -73,47 +73,6 @@
         </div>
     </div>
 </div>
+<script src="<c:url value="/js/university.js"/>" type="text/javascript"></script>
 </body>
-<script>
-    const facultyAddFormContainer = document.querySelector("#addFacultyContainer");
-    const addFacultyButton = document.querySelector("#addFacultyButton");
-
-    const addFacultyDiv = document.createElement("div");
-    addFacultyDiv.setAttribute("id", "divToMoveItMoveIt")
-    addFacultyDiv.setAttribute("class", "d-flex flex-column")
-
-    const addFacultyForm = document.createElement("form");
-    addFacultyForm.setAttribute("action", "university-servlet")
-    addFacultyForm.setAttribute("method", "post");
-
-    const addFacultyNameInput = document.createElement("input");
-    addFacultyNameInput.setAttribute("placeholder", "Faculty name");
-    addFacultyNameInput.setAttribute("name", "facultyToCreateName");
-    addFacultyNameInput.setAttribute("class", "form-control mt-2");
-
-    const addFacultyInvisibleOperationType = document.createElement("input");
-    addFacultyInvisibleOperationType.setAttribute("name", "facultyActionType");
-    addFacultyInvisibleOperationType.setAttribute("value", "Create");
-    addFacultyInvisibleOperationType.style.display = "none";
-
-    const buttonWrapper = document.createElement("div")
-    buttonWrapper.setAttribute("class", "d-flex justify-content-center w-100 mt-3")
-
-    const addFacultySubmitButton = document.createElement("button");
-    addFacultySubmitButton.setAttribute("class", "btn btn-success w-25");
-    addFacultySubmitButton.setAttribute("type", "submit")
-    addFacultySubmitButton.innerText = "Create Faculty!"
-
-    buttonWrapper.append(addFacultySubmitButton)
-    addFacultyForm.append(addFacultyNameInput, addFacultyInvisibleOperationType, buttonWrapper);
-    addFacultyDiv.append(addFacultyForm);
-    addFacultyButton.addEventListener('click', (event) => {
-        const divToMoveItMoveIt = document.querySelector("#divToMoveItMoveIt");
-        event.target.dataset.status === "active" ? divToMoveItMoveIt.remove() : facultyAddFormContainer.append(addFacultyDiv);
-
-        event.target.dataset.status = event.target.dataset.status === "active" ? "inactive" : "active";
-        addFacultyButton.innerText = addFacultyButton.innerText === "Add new faculty" ? "Cancel" : "Add new faculty";
-        addFacultyButton.className = addFacultyButton.innerText === "Add new faculty" ? "btn btn-primary" : "btn btn-danger";
-    })
-</script>
 </html>

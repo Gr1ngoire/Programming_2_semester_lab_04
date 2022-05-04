@@ -41,7 +41,7 @@
                 </form>
             </div>
             <h1 class="bg-info text-center rounded w-75">Faculty: <p
-                    class="text-danger"><c:out value="${requestScope.faculty.name}"/></p></h1>
+                    class="text-danger" id="facultyHeadingToUse"><c:out value="${requestScope.faculty.name}"/></p></h1>
         </div>
         <div class="container-fluid d-flex flex-column rounded">
             <table class="table table-info rounded mt-4">
@@ -107,65 +107,6 @@
         </div>
     </div>
 </div>
+<script src="<c:url value="/js/faculty.js"/>" type="text/javascript"></script>
 </body>
-<script>
-    const studentAddFormContainer = document.querySelector("#addStudentContainer");
-    const addStudentButton = document.querySelector("#addStudentButton");
-
-    const addStudentDiv = document.createElement("div");
-    addStudentDiv.setAttribute("id", "divToMoveItMoveIt");
-    addStudentDiv.setAttribute("class", "d-flex flex-column");
-
-    const addStudentForm = document.createElement("form");
-    addStudentForm.setAttribute("action", "faculty-servlet");
-    addStudentForm.setAttribute("method", "post");
-
-    const addStudentNameInput = document.createElement("input");
-    addStudentNameInput.setAttribute("placeholder", "Student name");
-    addStudentNameInput.setAttribute("name", "studentToCreateName");
-    addStudentNameInput.setAttribute("class", "form-control mt-1");
-
-    const addStudentSurnameInput = document.createElement("input");
-    addStudentSurnameInput.setAttribute("placeholder", "Student surname");
-    addStudentSurnameInput.setAttribute("name", "studentToCreateSurname");
-    addStudentSurnameInput.setAttribute("class", "form-control mt-1");
-
-    const addStudentMarkBookIdInput = document.createElement("input");
-    addStudentMarkBookIdInput.setAttribute("placeholder", "Student mark book id");
-    addStudentMarkBookIdInput.setAttribute("name", "studentToCreateMarkBookId");
-    addStudentMarkBookIdInput.setAttribute("class", "form-control mt-1");
-
-    const addStudentAverageMarkInput = document.createElement("input");
-    addStudentAverageMarkInput.setAttribute("placeholder", "Student average mark");
-    addStudentAverageMarkInput.setAttribute("name", "studentToCreateAverageMark");
-    addStudentAverageMarkInput.setAttribute("class", "form-control mt-1");
-
-    const addStudentInvisibleFacultyInput = document.createElement("input");
-    addStudentInvisibleFacultyInput.setAttribute("name", "studentToCreateFaculty");
-    addStudentInvisibleFacultyInput.setAttribute("value", "${requestScope.get("faculty").name}");
-    addStudentInvisibleFacultyInput.style.display = "none";
-
-    const buttonWrapper = document.createElement("div");
-    buttonWrapper.setAttribute("class", "d-flex justify-content-center w-100 mt-3");
-
-    const addStudentSubmitButton = document.createElement("input");
-    addStudentSubmitButton.setAttribute("class", "btn btn-success w-25");
-    addStudentSubmitButton.setAttribute("type", "submit");
-    addStudentSubmitButton.setAttribute("name", "actionType");
-    addStudentSubmitButton.setAttribute("value", "Create");
-
-    buttonWrapper.append(addStudentSubmitButton);
-    addStudentForm.append(addStudentNameInput, addStudentSurnameInput, addStudentMarkBookIdInput, addStudentAverageMarkInput, addStudentInvisibleFacultyInput, buttonWrapper);
-    addStudentDiv.append(addStudentForm);
-
-    addStudentButton.addEventListener('click', (event) => {
-        const divToMoveItMoveIt = document.querySelector("#divToMoveItMoveIt");
-        event.target.dataset.status === "active" ? divToMoveItMoveIt.remove() : studentAddFormContainer.append(addStudentDiv);
-
-        event.target.dataset.status = event.target.dataset.status === "active" ? "inactive" : "active";
-        addStudentButton.innerText = addStudentButton.innerText === "Add new student" ? "Cancel" : "Add new student";
-        addStudentButton.className = addStudentButton.innerText === "Add new student" ? "btn btn-primary" : "btn btn-danger";
-    })
-
-</script>
 </html>

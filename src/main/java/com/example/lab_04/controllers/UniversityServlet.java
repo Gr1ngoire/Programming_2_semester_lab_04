@@ -6,7 +6,6 @@ import com.example.lab_04.services.Actions.crudActions.facultyActions.addFaculty
 import com.example.lab_04.services.Actions.crudActions.facultyActions.deleteFacultyAction;
 import com.example.lab_04.services.Actions.crudActions.universityActions.UniversityAction;
 import com.example.lab_04.services.Actions.crudActions.universityActions.getUniversityAction;
-import com.example.lab_04.services.Entities.University;
 import com.example.lab_04.services.Utils.validators.FacultyValidator;
 
 import java.io.*;
@@ -33,12 +32,13 @@ public class UniversityServlet extends HttpServlet {
 
         facultyActions.put("Create", new addFacultyAction());
         facultyActions.put("Delete", new deleteFacultyAction());
-        try {
-            // dao.writeTestData();
-            University university = dao.getData();
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+//
+//        try {
+//            dao.writeTestData();
+//            University university = dao.getData();
+//        } catch (IOException | ClassNotFoundException e) {
+//            System.out.println(e.getMessage());
+//        }
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -11,8 +11,8 @@ import java.util.Objects;
 public class Student extends HumanInUniversity implements Serializable {
     private String name;
     private String surname;
-    private String faculty;
-    private String markBookId;
+    private final String faculty;
+    private final String markBookId;
     private double averageMark;
 
     public Student(StudentBuilder studentBuilder) {

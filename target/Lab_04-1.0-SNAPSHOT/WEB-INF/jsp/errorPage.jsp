@@ -35,11 +35,8 @@
     <div class="card mt-5 mb-5 " style="border: none;">
         <img class="card-img-top" src="https://i.redd.it/34kcp87vt5e11.jpg" alt="Card image cap">
         <div class="card-body d-flex flex-column justify-content-center bg-danger">
-            <h1 class="card-title text-center text-warning">Error occurred</h1>
+            <h1 class="card-title text-center text-warning">Error occurred:</h1>
             <p class="card-text text-center text-warning" style="font-size: 2rem;">${requestScope.error}</p>
-            <form action="control-servlet">
-                <button class="btn btn-outline-warning w-100">Go back on main page</button>
-            </form>
         </div>
     </div>
 </body>
