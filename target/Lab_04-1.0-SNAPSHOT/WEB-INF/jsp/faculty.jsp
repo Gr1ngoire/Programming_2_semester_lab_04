@@ -69,8 +69,14 @@
                                 </button>
                             </form>
                             <form action="faculty-servlet" method="post" class="d-flex flex-row justify-content-center">
+                                <input type="text" style="display: none;" name="studentName"
+                                       value="${student.name}">
+                                <input type="text" style="display: none;" name="studentSurname"
+                                       value="${student.surname}">
                                 <input type="text" style="display: none;" name="studentMarkBookId"
                                        value="${student.markBookId}">
+                                <input type="text" style="display: none;" name="studentAverageMark"
+                                       value="${student.averageMark}">
                                 <input type="text" style="display: none;" name="studentFaculty"
                                        value="${student.faculty}">
                                 <input type="text" style="display: none" name="actionType" value="Delete">

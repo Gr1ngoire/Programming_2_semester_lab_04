@@ -1,6 +1,6 @@
 package com.example.lab_04.controllers;
 
-import com.example.lab_04.dao.DAO;
+import com.example.lab_04.dao.BinaryFileDAO;
 import com.example.lab_04.services.Actions.crudActions.facultyActions.FacultyAction;
 import com.example.lab_04.services.Actions.crudActions.facultyActions.addFacultyAction;
 import com.example.lab_04.services.Actions.crudActions.facultyActions.deleteFacultyAction;
@@ -18,13 +18,13 @@ import javax.servlet.annotation.*;
 
 @WebServlet(name = "greetingServlet", value = "/university-servlet")
 public class UniversityServlet extends HttpServlet {
-    DAO dao;
+    BinaryFileDAO binaryFileDao;
     FacultyCustomValidator facultyValidator;
     Map<String, UniversityAction> universityActions;
     Map<String, FacultyAction> facultyActions;
 
     public void init() {
-        dao = new DAO();
+        binaryFileDao = new BinaryFileDAO();
         universityActions = new HashMap<>();
         facultyActions = new HashMap<>();
         facultyValidator = new FacultyCustomValidator();
@@ -33,8 +33,8 @@ public class UniversityServlet extends HttpServlet {
         facultyActions.put("Delete", new deleteFacultyAction());
 //
 //        try {
-//            dao.writeTestData();
-//            University university = dao.getData();
+//            binaryFileDao.writeTestData();
+//            University university = binaryFileDao.getData();
 //        } catch (IOException | ClassNotFoundException e) {
 //            System.out.println(e.getMessage());
 //        }
@@ -42,7 +42,7 @@ public class UniversityServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            universityActions.get("Get").execute(dao, request, response);
+            universityActions.get("Get").execute(binaryFileDao, request, response);
         } catch (ClassNotFoundException | IOException e) {
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("WEB-INF/jsp/errorPage.jsp").forward(request, response);
@@ -52,16 +52,15 @@ public class UniversityServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        FacultyReceiveDTO frd = new FacultyReceiveDTO(request.getParameter("facultyName"));
-        System.out.println(frd.getName());
+        FacultyReceiveDTO frDTO = new FacultyReceiveDTO(request.getParameter("facultyName"));
         String action = request.getParameter("facultyActionType");
         try {
-            facultyValidator.validate(frd.asHashMap());
+            facultyValidator.validate(frDTO.asHashMap());
             if (facultyActions.get(action) == null) {
                 throw new NullPointerException("There is no such action");
             }
 
-            facultyActions.get(action).execute(dao, request, response);
+            facultyActions.get(action).execute(binaryFileDao, frDTO, request, response);
         } catch (IllegalArgumentException | ClassNotFoundException | ClassCastException | NullPointerException | IOException e) {
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("WEB-INF/jsp/errorPage.jsp").forward(request, response);

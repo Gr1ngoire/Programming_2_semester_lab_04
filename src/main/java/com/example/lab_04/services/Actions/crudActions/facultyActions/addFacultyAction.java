@@ -1,6 +1,8 @@
 package com.example.lab_04.services.Actions.crudActions.facultyActions;
 
-import com.example.lab_04.dao.DAO;
+import com.example.lab_04.dao.BinaryFileDAO;
+import com.example.lab_04.dao.JsonDAO;
+import com.example.lab_04.services.DTOs.FacultyReceiveDTO;
 import com.example.lab_04.services.Entities.Faculty;
 import com.example.lab_04.services.Entities.University;
 
@@ -12,12 +14,12 @@ import java.util.ArrayList;
 
 public class addFacultyAction implements FacultyAction{
     @Override
-    public void execute(DAO dao, HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, ServletException {
-        String facultyToCreateName = request.getParameter("facultyName");
+    public void execute(BinaryFileDAO binaryFileDao, FacultyReceiveDTO facultyReceiveDTO, HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, ServletException {
+        String facultyToCreateName = facultyReceiveDTO.getName();
         Faculty newFaculty = new Faculty.FacultyBuilder(facultyToCreateName).setStudents(new ArrayList<>()).build();
-        University university = dao.getData();
+        University university = binaryFileDao.getData();
         university.addFaculty(newFaculty);
-        dao.update(university);
+        binaryFileDao.update(university);
         request.setAttribute("university", university);
         request.getRequestDispatcher("WEB-INF/jsp/university.jsp").forward(request, response);
     }

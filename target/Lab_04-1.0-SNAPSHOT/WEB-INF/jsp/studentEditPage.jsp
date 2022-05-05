@@ -47,21 +47,21 @@
                 </div>
                 <div class="container-fluid d-flex flex-column rounded mt-3 mb-3">
 
-                    <input type="text" class="form-control" name="studentToEditName"
+                    <input type="text" class="form-control" name="studentName"
                            value="${requestScope.student.name}">
 
-                    <input type="text" class="form-control" name="studentToEditSurname"
+                    <input type="text" class="form-control" name="studentSurname"
                            value="${requestScope.student.surname}">
 
                     <input type="text" class="form-control" disabled value="${requestScope.student.faculty}">
-                    <input type="text" class="form-control" name="studentToEditFaculty" style="display: none;"
+                    <input type="text" class="form-control" name="studentFaculty" style="display: none;"
                            value="${requestScope.student.faculty}">
 
                     <input type="text" class="form-control" disabled value="${requestScope.student.markBookId}">
-                    <input type="text" class="form-control" name="studentToEditMarkBookId" style="display: none;"
+                    <input type="text" class="form-control" name="studentMarkBookId" style="display: none;"
                            value="${requestScope.student.markBookId}">
 
-                    <input type="text" class="form-control" name="studentToEditAverageMark"
+                    <input type="text" class="form-control" name="studentAverageMark"
                            value="${requestScope.student.averageMark}">
 
                 </div>

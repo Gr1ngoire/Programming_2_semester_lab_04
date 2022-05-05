@@ -68,6 +68,7 @@ export class CustomForm {
             }
         } else {
             for (const invisibleInput of invisibleInputsData) {
+                console.log(invisibleInput)
                 addForm.append(this.#addInvisibleInput(invisibleInput.name, invisibleInput.value))
             }
         }

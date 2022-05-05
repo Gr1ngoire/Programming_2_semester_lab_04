@@ -68,6 +68,17 @@ public class StudentReceiveDTO {
         this.faculty = faculty;
     }
 
+    @Override
+    public String toString() {
+        return "StudentReceiveDTO{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", markBookId='" + markBookId + '\'' +
+                ", averageMark='" + averageMark + '\'' +
+                ", faculty='" + faculty + '\'' +
+                '}';
+    }
+
     public static class StudentReceiveDTOBuilder {
         private final String name;
         private String surname;

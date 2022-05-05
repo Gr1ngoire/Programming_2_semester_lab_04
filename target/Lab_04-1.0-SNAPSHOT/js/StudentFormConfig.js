@@ -2,28 +2,28 @@ export const studentFormConfig = {
     inputsDataList: [
         {
             placeholder: "Student name",
-            name: "studentToCreateName",
+            name: "studentName",
             classStyle: "form-control mt-1",
             pattern: "^[A-ZА-Я][a-zA-Zа-яА-Я]*",
             isObligatory: true
         },
         {
             placeholder: "Student surname",
-            name: "studentToCreateSurname",
+            name: "studentSurname",
             classStyle: "form-control mt-1",
             pattern: "^[A-ZА-Я][a-zA-Zа-яА-Я]*",
             isObligatory: true
         },
         {
             placeholder: "Student mark book id",
-            name: "studentToCreateMarkBookId",
+            name: "studentMarkBookId",
             classStyle: "form-control mt-1",
             pattern: "[a-zA-Z]+_\\d+",
             isObligatory: true
         },
         {
             placeholder: "Student average mark",
-            name: "studentToCreateAverageMark",
+            name: "studentAverageMark",
             classStyle: "form-control mt-1",
             pattern: "^(\\d+\\.*\\d+)$",
             isObligatory: true

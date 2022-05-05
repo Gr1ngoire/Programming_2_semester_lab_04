@@ -7,7 +7,9 @@ import com.example.lab_04.services.Entities.University;
 import java.io.*;
 import java.util.ArrayList;
 
-public class DAO {
+public class BinaryFileDAO extends MyDAO {
+
+    @Override
     public void update(University toWrite) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("D:\\Desktop\\University\\Labs\\Programming_2_semester\\Lab_04\\src\\main\\java\\com\\example\\lab_04\\myDatabase\\db.bin"));) {
             oos.writeObject(toWrite);
@@ -16,6 +18,7 @@ public class DAO {
         }
     }
 
+    @Override
     public University getData() throws IOException, ClassNotFoundException, ClassCastException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:\\Desktop\\University\\Labs\\Programming_2_semester\\Lab_04\\src\\main\\java\\com\\example\\lab_04\\myDatabase\\db.bin"));) {
             return (University) ois.readObject();

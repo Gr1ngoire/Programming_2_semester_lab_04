@@ -1,6 +1,6 @@
 package com.example.lab_04.controllers;
 
-import com.example.lab_04.dao.DAO;
+import com.example.lab_04.dao.BinaryFileDAO;
 import com.example.lab_04.services.Entities.Faculty;
 import com.example.lab_04.services.Entities.Student;
 import com.example.lab_04.services.Utils.validators.StudentCustomValidator;
@@ -14,11 +14,11 @@ import java.util.List;
 
 @WebServlet(name = "StudentServlet", value = "/student-servlet")
 public class StudentServlet extends HttpServlet {
-    DAO dao;
+    BinaryFileDAO binaryFileDao;
     StudentCustomValidator studentCustomValidator;
 
     public void init() {
-        dao = new DAO();
+        binaryFileDao = new BinaryFileDAO();
         studentCustomValidator = new StudentCustomValidator();
     }
 
@@ -34,7 +34,7 @@ public class StudentServlet extends HttpServlet {
                 put("markBookId", studentBookMarkId);
                 put("faculty", facultyName);
             }});
-            List<Faculty> facultiesList = dao.getData().getFaculties();
+            List<Faculty> facultiesList = binaryFileDao.getData().getFaculties();
             for (Faculty f : facultiesList) {
                 if (f.getName().equals(facultyName)) {
                     for (Student s : f.getStudents()) {

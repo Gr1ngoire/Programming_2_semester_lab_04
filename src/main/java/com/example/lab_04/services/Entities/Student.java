@@ -92,7 +92,7 @@ public class Student extends HumanInUniversity implements Serializable {
     }
 
     public static class StudentBuilder {
-        private String name;
+        private final String name;
         private String surname;
         private String faculty;
         private String markBookId;
