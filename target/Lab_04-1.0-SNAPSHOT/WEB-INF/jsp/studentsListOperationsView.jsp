@@ -56,8 +56,8 @@
                     <td class="text-center">${student.surname}</td>
                     <td>
                         <form action="student-servlet" class="d-flex flex-row justify-content-center">
-                            <input type="text" style="display: none;" name="studentNameSurname"
-                                   value="${student.name} ${student.surname} ${student.faculty}">
+                            <input type="text" style="display: none;" name="studentMarkBookId" value="${student.markBookId}">
+                            <input type="text" style="display: none;" name="studentFaculty" value="${student.faculty}"/>
                             <button class="btn btn-success" type="submit">
                                 Get ${student.name} info
                             </button>

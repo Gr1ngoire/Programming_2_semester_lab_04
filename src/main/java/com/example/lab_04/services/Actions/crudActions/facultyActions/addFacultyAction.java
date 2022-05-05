@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class addFacultyAction implements FacultyAction{
     @Override
     public void execute(DAO dao, HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, ServletException {
-        String facultyToCreateName = request.getParameter("facultyToCreateName");
+        String facultyToCreateName = request.getParameter("facultyName");
         Faculty newFaculty = new Faculty.FacultyBuilder(facultyToCreateName).setStudents(new ArrayList<>()).build();
         University university = dao.getData();
         university.addFaculty(newFaculty);

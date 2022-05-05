@@ -1,4 +1,4 @@
-class CustomForm {
+export class CustomForm {
     #inputsDataList
     #invisibleInputsDataList
     #submitButtonConfig
@@ -49,7 +49,7 @@ class CustomForm {
         return buttonWrapper
     }
 
-    build(invisibleStatic, ...rest) {
+    build(invisibleStatic, invisibleInputsData) {
         const addDiv = document.createElement("div");
         addDiv.setAttribute("id", this.#formOuterDivConfig.divId)
         addDiv.setAttribute("class", this.#formOuterDivConfig.divClassStyle)
@@ -67,7 +67,7 @@ class CustomForm {
                 addForm.append(this.#addInvisibleInput(invisibleInput.name, invisibleInput.value))
             }
         } else {
-            for (const invisibleInput of rest.invisibleInputsData) {
+            for (const invisibleInput of invisibleInputsData) {
                 addForm.append(this.#addInvisibleInput(invisibleInput.name, invisibleInput.value))
             }
         }

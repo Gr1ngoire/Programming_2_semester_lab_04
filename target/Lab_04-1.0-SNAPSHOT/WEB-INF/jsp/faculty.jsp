@@ -61,8 +61,9 @@
                         <td class="text-center"><c:out value="${student.surname}"/></td>
                         <td class="d-flex justify-content-center">
                             <form action="student-servlet" class="d-flex flex-row justify-content-center">
-                                <input type="text" style="display: none;" name="studentNameSurname"
-                                       value="${student.markBookId} ${student.faculty}">
+                                <input type="text" style="display: none;" name="studentMarkBookId"
+                                       value="${student.markBookId}">
+                                <input type="text" style="display: none;" name="studentFaculty" value="${student.faculty}">
                                 <button class="btn btn-success" type="submit">
                                     Get <c:out value="${student.name}"/> info
                                 </button>
@@ -83,8 +84,9 @@
                                 </button>
                             </form>
                             <form action="student-servlet" class="d-flex flex-row justify-content-center">
-                                <input type="text" style="display: none;" name="studentNameSurname"
-                                       value="${student.markBookId} ${student.faculty}">
+                                <input type="text" style="display: none;" name="studentMarkBookId"
+                                       value="${student.markBookId}">
+                                <input type="text" style="display: none;" name="studentFaculty" value="${student.faculty}">
                                 <input type="text" style="display: none" name="actionTypeToLookAt" value="Edit">
                                 <button class="btn btn-dark" type="submit">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -107,6 +109,6 @@
         </div>
     </div>
 </div>
-<script src="<c:url value="/js/faculty.js"/>" type="text/javascript"></script>
+<script type="module" src="<c:url value="/js/faculty.js"/>"></script>
 </body>
 </html>

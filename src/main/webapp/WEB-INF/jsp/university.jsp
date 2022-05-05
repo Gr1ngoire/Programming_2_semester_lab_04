@@ -73,6 +73,6 @@
         </div>
     </div>
 </div>
-<script src="<c:url value="/js/university.js"/>" type="text/javascript"></script>
+<script type="module" src="<c:url value="/js/university.js"/>"></script>
 </body>
 </html>

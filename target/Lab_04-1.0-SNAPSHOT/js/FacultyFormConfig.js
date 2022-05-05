@@ -2,7 +2,7 @@ export const facultyFormConfig = {
     inputsDataList: [
         {
             placeholder: "Faculty name",
-            name: "facultyToCreateName",
+            name: "facultyName",
             classStyle: "form-control mt-2",
             pattern: "^[A-ZА-Я][a-zA-Zа-яА-Я]*",
             isObligatory: true

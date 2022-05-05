@@ -1,4 +1,5 @@
-import { facultyFormConfig } from "./FacultyFormConfig";
+import { CustomForm} from "./CustomForm.js";
+import { facultyFormConfig } from "./FacultyFormConfig.js"
 
 const facultyAddFormContainer = document.querySelector("#addFacultyContainer");
 const addFacultyButton = document.querySelector("#addFacultyButton");

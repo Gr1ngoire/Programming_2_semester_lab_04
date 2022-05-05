@@ -6,7 +6,8 @@ import com.example.lab_04.services.Actions.crudActions.facultyActions.addFaculty
 import com.example.lab_04.services.Actions.crudActions.facultyActions.deleteFacultyAction;
 import com.example.lab_04.services.Actions.crudActions.universityActions.UniversityAction;
 import com.example.lab_04.services.Actions.crudActions.universityActions.getUniversityAction;
-import com.example.lab_04.services.Utils.validators.FacultyValidator;
+import com.example.lab_04.services.DTOs.FacultyReceiveDTO;
+import com.example.lab_04.services.Utils.validators.FacultyCustomValidator;
 
 import java.io.*;
 import java.util.HashMap;
@@ -18,18 +19,16 @@ import javax.servlet.annotation.*;
 @WebServlet(name = "greetingServlet", value = "/university-servlet")
 public class UniversityServlet extends HttpServlet {
     DAO dao;
-    FacultyValidator facultyValidator;
+    FacultyCustomValidator facultyValidator;
     Map<String, UniversityAction> universityActions;
     Map<String, FacultyAction> facultyActions;
 
     public void init() {
+        dao = new DAO();
         universityActions = new HashMap<>();
         facultyActions = new HashMap<>();
-        facultyValidator = new FacultyValidator();
-        dao = new DAO();
-
+        facultyValidator = new FacultyCustomValidator();
         universityActions.put("Get", new getUniversityAction());
-
         facultyActions.put("Create", new addFacultyAction());
         facultyActions.put("Delete", new deleteFacultyAction());
 //
@@ -53,14 +52,17 @@ public class UniversityServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String facultyToCreateName = request.getParameter("facultyToCreateName");
+        FacultyReceiveDTO frd = new FacultyReceiveDTO(request.getParameter("facultyName"));
+        System.out.println(frd.getName());
         String action = request.getParameter("facultyActionType");
         try {
-            if (facultyToCreateName != null) {
-                facultyValidator.validateAll(facultyToCreateName.trim().split(" "));
+            facultyValidator.validate(frd.asHashMap());
+            if (facultyActions.get(action) == null) {
+                throw new NullPointerException("There is no such action");
             }
+
             facultyActions.get(action).execute(dao, request, response);
-        } catch (IllegalArgumentException | ClassNotFoundException | ClassCastException | IOException e) {
+        } catch (IllegalArgumentException | ClassNotFoundException | ClassCastException | NullPointerException | IOException e) {
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("WEB-INF/jsp/errorPage.jsp").forward(request, response);
         }

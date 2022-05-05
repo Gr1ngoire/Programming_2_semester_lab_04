@@ -1,4 +1,5 @@
-import { studentFormConfig } from "./StudentFormConfig";
+import { CustomForm } from "./CustomForm.js";
+import { studentFormConfig } from "./StudentFormConfig.js"
 
 const studentAddFormContainer = document.querySelector("#addStudentContainer");
 const addStudentButton = document.querySelector("#addStudentButton");
