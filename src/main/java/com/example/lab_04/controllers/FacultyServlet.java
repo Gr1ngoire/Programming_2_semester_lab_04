@@ -1,6 +1,7 @@
 package com.example.lab_04.controllers;
 
 import com.example.lab_04.dao.BinaryFileDAO;
+import com.example.lab_04.dao.JsonDAO;
 import com.example.lab_04.services.Actions.crudActions.studentActions.StudentAction;
 import com.example.lab_04.services.Actions.crudActions.studentActions.addStudentAction;
 import com.example.lab_04.services.Actions.crudActions.studentActions.deleteStudentAction;
@@ -20,13 +21,13 @@ import java.util.Map;
 
 @WebServlet(name = "FacultyServlet", value = "/faculty-servlet")
 public class FacultyServlet extends HttpServlet {
-    BinaryFileDAO binaryFileDao;
+    JsonDAO dao;
     FacultyCustomValidator facultyCustomValidator;
     StudentCustomValidator studentValidator;
     Map<String, StudentAction> actions;
 
     public void init() {
-        binaryFileDao = new BinaryFileDAO();
+        dao = new JsonDAO();
         facultyCustomValidator = new FacultyCustomValidator();
         studentValidator = new StudentCustomValidator();
         actions = new HashMap<>();
@@ -43,7 +44,7 @@ public class FacultyServlet extends HttpServlet {
         try {
             String facultyName = request.getParameter("facultyName");
             facultyCustomValidator.validate(new HashMap<String, String>(){{put("facultyName", facultyName);}});
-            List<Faculty> faculties = binaryFileDao.getData().getFaculties();
+            List<Faculty> faculties = dao.getData().getFaculties();
             for (Faculty f : faculties) {
                 if (f.getName().equals(facultyName)) {
                     request.setAttribute("faculty", f);
@@ -76,7 +77,7 @@ public class FacultyServlet extends HttpServlet {
                     .build();
             studentValidator.validate(studentDTO.asHashMap());
 
-            actions.get(actionType).execute(binaryFileDao, studentDTO, request, response);
+            actions.get(actionType).execute(dao, studentDTO, request, response);
 
         } catch (IllegalArgumentException | ClassNotFoundException | ClassCastException | NullPointerException | IOException e) {
             request.setAttribute("error", e.getMessage());

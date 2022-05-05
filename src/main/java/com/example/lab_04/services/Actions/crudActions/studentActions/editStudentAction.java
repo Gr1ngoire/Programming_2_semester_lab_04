@@ -1,6 +1,6 @@
 package com.example.lab_04.services.Actions.crudActions.studentActions;
 
-import com.example.lab_04.dao.BinaryFileDAO;
+import com.example.lab_04.dao.MyDAO;
 import com.example.lab_04.services.DTOs.StudentReceiveDTO;
 import com.example.lab_04.services.Entities.Faculty;
 import com.example.lab_04.services.Entities.Student;
@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class editStudentAction implements StudentAction{
     @Override
-    public void execute(BinaryFileDAO binaryFileDao, StudentReceiveDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ClassNotFoundException {
+    public void execute(MyDAO dao, StudentReceiveDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, ClassNotFoundException {
         String studentToEditName = dto.getName();
         String studentToEditSurname = dto.getSurname();
         String studentToEditMarkBookId = dto.getMarkBookId();
@@ -21,13 +21,13 @@ public class editStudentAction implements StudentAction{
         String studentToEditFaculty = dto.getFaculty();
 
         Student updatedStudent = new Student.StudentBuilder(studentToEditName).setSurname(studentToEditSurname).setFaculty(studentToEditFaculty).setMarkBookId(studentToEditMarkBookId).setAverageMark(Double.parseDouble(studentToEditAverageMark)).build();
-        University university = binaryFileDao.getData();
+        University university = dao.getData();
         for (Faculty f : university.getFaculties()) {
             if (f.getName().equals(studentToEditFaculty)) {
                 for (Student s: f.getStudents()) {
                     if (s.getMarkBookId().equals(updatedStudent.getMarkBookId())) {
                         f.updateStudent(updatedStudent);
-                        binaryFileDao.update(university);
+                        dao.update(university);
                         request.setAttribute("faculty", f);
                         request.getRequestDispatcher("WEB-INF/jsp/faculty.jsp").forward(request, response);
                         return;

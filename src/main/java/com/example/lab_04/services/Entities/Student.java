@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Student extends HumanInUniversity implements Serializable {
+public class Student implements Serializable {
     private String name;
     private String surname;
     private final String faculty;

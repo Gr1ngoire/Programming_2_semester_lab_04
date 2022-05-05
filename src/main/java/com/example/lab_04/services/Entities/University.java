@@ -67,6 +67,13 @@ public class University implements Serializable {
         return Objects.hash(name, faculties);
     }
 
+    @Override
+    public String toString() {
+        return "University{" +
+                "name='" + name + '\'' +
+                ", faculties=" + faculties +
+                '}';
+    }
 
     public static class UniversityBuilder {
         private String name;
